@@ -19,7 +19,12 @@ class ASORanking:
         'GB': 'United Kingdom',
         'FR': 'France',
         'RU': 'Russian Federation',
-        'IN': 'India'
+        'IN': 'India',
+        'IT': 'Italy',
+        'CA': 'Canada',
+        'BR': 'Brazil',
+        'ES': 'Spain',
+        'PL': 'Poland'
     }
 
     def run(self):
