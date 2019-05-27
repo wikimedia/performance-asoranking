@@ -319,7 +319,22 @@ class ASORanking:
                     label = 'Mobile' if network == 'cellular' else 'Desktop'
 
                     for ranking_tuple in ranking:
-                        f.write('%s\t%s\t%s\t%s\n' % (country_name, country, label, '\t'.join(map(str, ranking_tuple))))
+                        self.logger.debug(
+                            'Writing tuple: %r for %s %s %s' % (
+                                ranking_tuple,
+                                country_name,
+                                country,
+                                label
+                            )
+                        )
+                        f.write(
+                            u'%s\t%s\t%s\t%s\n' % (
+                                country_name,
+                                country,
+                                label,
+                                '\t'.join(map(lambda x: x.encode('utf-8'), ranking_tuple))
+                            )
+                        )
 
         print('Dataset written to %s' % filepath)
 
