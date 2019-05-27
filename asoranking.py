@@ -9,6 +9,7 @@ import tempfile
 import geoip2.database
 import numpy
 import pandas
+import six
 
 
 class ASORanking:
@@ -271,6 +272,12 @@ class ASORanking:
 
         return final_ranking
 
+    def sanitize_tuple_item(self, x):
+        if isinstance(x, six.string_types):
+            return x.encode('utf-8')
+        else:
+            return x
+
     def generate_report(self):
         year = self.args.year
         month = self.args.month
@@ -328,12 +335,13 @@ class ASORanking:
                                 label
                             )
                         )
+
                         f.write(
                             u'%s\t%s\t%s\t%s\n' % (
                                 country_name,
                                 country,
                                 label,
-                                '\t'.join(map(lambda x: x.encode('utf-8'), ranking_tuple))
+                                '\t'.join(map(self.sanitize_tuple_item, ranking))
                             )
                         )
 
