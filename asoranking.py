@@ -151,7 +151,8 @@ class ASORanking:
                     response = reader.isp(ip)
                     asn = int(response.autonomous_system_number)
                     aso = response.autonomous_system_organization
-                except (geoip2.errors.AddressNotFoundError, TypeError):
+                except (geoip2.errors.AddressNotFoundError, TypeError, ValueError):
+                    self.logger.debug('Could not determine ASN/ASO for ip address %r' % ip)
                     asn = 0
                     aso = ''
 
