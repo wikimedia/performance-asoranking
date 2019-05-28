@@ -341,7 +341,7 @@ class ASORanking:
                                 country_name,
                                 country,
                                 label,
-                                '\t'.join(map(self.sanitize_tuple_item, ranking))
+                                '\t'.join(map(self.sanitize_tuple_item, ranking_tuple))
                             )
                         )
 
