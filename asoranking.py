@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 import datetime
 import logging
@@ -9,7 +11,6 @@ import tempfile
 import geoip2.database
 import numpy
 import pandas
-import six
 
 
 class ASORanking:
@@ -272,28 +273,22 @@ class ASORanking:
 
         return final_ranking
 
-    def sanitize_tuple_item(self, x):
-        if isinstance(x, six.string_types):
-            return x.encode('utf-8')
-        else:
-            return str(x)
-
     def generate_report(self):
         year = self.args.year
         month = self.args.month
         countries = self.args.countries
         tsv_headers = [
-            'Country',
-            'Country code',
-            'Type',
-            'ASO',
-            'TTFB',
-            'PLT',
-            'CPU',
-            'Transfer size',
-            'Sample size'
+            u'Country',
+            u'Country code',
+            u'Type',
+            u'ASO',
+            u'TTFB',
+            u'PLT',
+            u'CPU',
+            u'Transfer size',
+            u'Sample size'
         ]
-        tsv_header = '\t'.join(tsv_headers) + '\n'
+        tsv_header = u'\u0009'.join(tsv_headers) + u'\u000A'
 
         filepath = '%d-%02d.tsv' % (year, month)
         publish_path = '/srv/published-datasets/performance/autonomoussystems/'
@@ -337,12 +332,12 @@ class ASORanking:
                         )
 
                         f.write(
-                            u'%s\t%s\t%s\t%s\n' % (
+                            (u'%s\t%s\t%s\t%s\n' % (
                                 country_name,
                                 country,
                                 label,
-                                '\t'.join(map(self.sanitize_tuple_item, ranking_tuple))
-                            )
+                                u'\u0009'.join(map(lambda x: str(x), ranking_tuple))
+                            ))
                         )
 
         print('Dataset written to %s' % filepath)
