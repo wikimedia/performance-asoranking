@@ -276,7 +276,7 @@ class ASORanking:
         if isinstance(x, six.string_types):
             return x.encode('utf-8')
         else:
-            return x
+            return str(x)
 
     def generate_report(self):
         year = self.args.year
