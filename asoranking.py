@@ -110,7 +110,8 @@ class ASORanking:
         sql = """SELECT useragent.device_family, ip, event.responseStart - event.connectStart AS ttfb,
             event.loadEventStart - event.responseStart AS plt, event.netinfoConnectionType AS type,
             event.pageviewToken, event.transferSize, event.mobileMode FROM event.NavigationTiming
-            WHERE year = %d AND month = %d AND event.originCountry = \'%s\';""" % (year, month, country)
+            WHERE year = %d AND month = %d AND event.originCountry = \'%s\'
+            SORT BY RAND() LIMIT 1000000;""" % (year, month, country)
 
         navtiming_dataset = self.fetch_sql(sql)
 
