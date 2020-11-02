@@ -231,7 +231,7 @@ class ASORanking:
 
         median_plt_by_aso = navtiming_dataset.groupby(navtiming_dataset.aso)[['plt']].median()
         median_transfersize_by_aso = navtiming_dataset.groupby(navtiming_dataset.aso)[['transfersize']].median()
-        median_ttfb_by_aso = median_ttfb_by_aso.sort(['ttfb'])
+        median_ttfb_by_aso = median_ttfb_by_aso.sort_values(by='ttfb')
 
         final_ranking = []
 
